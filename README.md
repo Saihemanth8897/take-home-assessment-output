@@ -280,4 +280,3 @@ This assessment should take approximately 4-6 hours to complete thoroughly.
 If you have any questions about the assessment, please reach out to the hiring team.
 
 Good luck! 🚀
-
