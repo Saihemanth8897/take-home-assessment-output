@@ -14,6 +14,8 @@ const TransactionHistory = ({ account }) => {
       try {
         // TODO: Call apiService.getTransactions with account address if available
         // TODO: Update transactions state
+        const data = await apiService.getTransactions(account);
+        setTransactions(data?.transactions || []);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -26,12 +28,13 @@ const TransactionHistory = ({ account }) => {
 
   const formatAddress = (address) => {
     if (!address) return '';
-    return `${address.slice(0, 8)}...${address.slice(-6)}`;
+    return `${address.slice(0, 12)}...${address.slice(-6)}`;
   };
 
   const formatDate = (timestamp) => {
     // TODO: Format the timestamp to a readable date
-    return timestamp;
+    if (!timestamp) return "N/A";
+    return new Date(timestamp).toLocaleString();
   };
 
   if (loading) {
@@ -64,11 +67,49 @@ const TransactionHistory = ({ account }) => {
       {/* TODO: Display transactions list */}
       {/* Show: type, from, to, amount, currency, status, timestamp, blockchainTxHash */}
       <div className="transactions-list">
-        {/* Your implementation here */}
-        <div className="placeholder">
-          <p>Transaction list will be displayed here</p>
-          <p>Implement the transaction list rendering</p>
-        </div>
+        {transactions.length === 0 ? (
+          <div className="placeholder">
+            <p>No transactions found.</p>
+          </div>
+        ) : (
+          transactions.map((tx, idx) => (
+            <div className="transaction-card" key={idx}>
+              <div className="transaction-header-info">
+                <span className="transaction-type">{tx.type || "N/A"}</span>
+                <span
+                  className={`transaction-status ${
+                    tx.status ? tx.status.toLowerCase() : ""
+                  }`}
+                >
+                  {tx.status || "N/A"}
+                </span>
+              </div>
+              <div className="transaction-details">
+                <div className="transaction-detail-item">
+                  <strong>From:</strong> {formatAddress(tx.from)}
+                </div>
+                <div className="transaction-detail-item">
+                  <strong>To:</strong> {formatAddress(tx.to)}{" "}
+                </div>
+                <div className="transaction-detail-item">
+                  <strong>Amount:</strong> {tx.amount} {tx.currency}
+                </div>
+                <div className="transaction-detail-item">
+                  <strong>Date:</strong> {formatDate(tx.timestamp)}
+                </div>
+                <div className="transaction-detail-item">
+                  <strong>Blockchain Tx Hash:</strong>{" "}
+                  <span
+                    className="transaction-tx-hash"
+                    style={{ wordBreak: "break-all", whiteSpace: "pre-line" }}
+                  >
+                    {tx.blockchainTxHash || "N/A"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
